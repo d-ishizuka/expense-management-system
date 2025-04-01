@@ -1,0 +1,106 @@
+openapi: 3.0.0
+info:
+  title: 経費精算API
+  description: 経費精算システムのAPI
+  version: 1.0.0
+paths:
+  /expenses:
+    get:
+      summary: 経費の一覧を取得
+      responses:
+        '200':
+          description: 経費の一覧
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Expense'
+    post:
+      summary: 新しい経費を作成
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Expense'
+      responses:
+        '201':
+          description: 経費が作成されました
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Expense'
+  /expenses/{id}:
+    get:
+      summary: 特定の経費を取得
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: 経費のID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 経費の詳細
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Expense'
+        '404':
+          description: 経費が見つかりません
+    put:
+      summary: 経費を更新
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: 経費のID
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Expense'
+      responses:
+        '200':
+          description: 経費が更新されました
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Expense'
+        '404':
+          description: 経費が見つかりません
+    delete:
+      summary: 経費を削除
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: 経費のID
+          schema:
+            type: string
+      responses:
+        '204':
+          description: 経費が削除されました
+        '404':
+          description: 経費が見つかりません
+components:
+  schemas:
+    Expense:
+      type: object
+      properties:
+        id:
+          type: string
+        amount:
+          type: number
+        description:
+          type: string
+        date:
+          type: string
+          format: date
+        userId:
+          type: string

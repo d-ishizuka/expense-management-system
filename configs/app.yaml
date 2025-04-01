@@ -1,0 +1,13 @@
+app_name: Expense Management System
+server:
+  port: 8080
+database:
+  host: localhost
+  port: 3306
+  user: root
+  password: your_password
+  name: expense_management
+jwt:
+  secret: your_jwt_secret
+  expiration: 24h
+log_level: info

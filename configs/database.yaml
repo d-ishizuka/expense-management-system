@@ -1,0 +1,10 @@
+database:
+  driver: mysql
+  host: localhost
+  port: 3306
+  username: your_username
+  password: your_password
+  database: expense_management
+  charset: utf8mb4
+  parseTime: true
+  sslmode: disable
